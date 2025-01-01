@@ -61,11 +61,9 @@ function handleMusic(id, name) {
   }
 }
 async function main() {
-  // Get the list of all songs
   let songs = await getSongs();
 
   
-  //Show all the songs in the playlist
 
   let songUL = document
     .querySelector(".songList")
