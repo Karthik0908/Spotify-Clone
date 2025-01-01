@@ -37,7 +37,6 @@ function handleMusic(id, name) {
   console.log(currentSong.currentTime, currentSong.currentduration);
 
   audio.addEventListener("timeupdate", function () {
-    // Update the song time progress (current time / duration)
     let currentTime = formatTime(audio.currentTime);
     let duration = formatTime(audio.duration);
     document.querySelector(
@@ -48,7 +47,6 @@ function handleMusic(id, name) {
     document.querySelector(".circle").style.left = (currentSong.currentTime / currentSong.duration) * 100 + "%";
 
   });
-  // Add eventListener to seekbar
 
   document.querySelector(".seekbar").addEventListener("click",e=>{
     console.log(e)
