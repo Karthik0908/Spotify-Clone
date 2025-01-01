@@ -82,7 +82,6 @@ async function main() {
               </div></li>`;
   }
 
-  //Attach an event listener to play , next and previous
 
   play.addEventListener("click", () => {
     if (currentSong.paused) {
