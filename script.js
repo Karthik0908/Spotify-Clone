@@ -49,7 +49,7 @@ function handleMusic(id, name) {
   });
 
   document.querySelector(".seekbar").addEventListener("click",e=>{
-    console.log(e)
+    console.log(e,"check")
   })
 
   function formatTime(seconds) {
