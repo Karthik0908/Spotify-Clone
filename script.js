@@ -49,7 +49,9 @@ function handleMusic(id, name) {
   });
 
   document.querySelector(".seekbar").addEventListener("click",e=>{
-    console.log(e,"check")
+   let percent =  (e.offsetX/e.target.getBoundingClientRect().width) * 100;
+   document.querySelector(".circle").style.left = percent +  "%";
+   currentSong.currentTime = ((currentSong.duration)* percent )/100
   })
 
   function formatTime(seconds) {
