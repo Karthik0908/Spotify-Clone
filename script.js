@@ -1,4 +1,5 @@
 console.log("let javascript");
+let songs;
 
 async function getSongs() {
   let a = await fetch("http://127.0.0.1:3000/songs/");
@@ -21,7 +22,8 @@ let currentSong = null;
 function handleMusic(id, name) {
   console.log(id, name, "helo");
   const songId = document.getElementById(id);
-  const songUrl = songId.id; // Store the song URL in a data attribute
+  const songUrl = songId.id; 
+ 
 
   if (currentSong) {
     currentSong.pause();
@@ -54,6 +56,40 @@ function handleMusic(id, name) {
    currentSong.currentTime = ((currentSong.duration)* percent )/100
   })
 
+  //Add an event listener for humburger
+   document.querySelector(".hamburger").addEventListener("click", ()=>{
+   document.querySelector(".left").style.left ="0"
+   })
+
+  //Add an event listener for close
+   document.querySelector(".close").addEventListener("click", ()=>{
+     document.querySelector(".left").style.left ="120%"
+   })
+
+
+   //add an event listener to back and next
+   back.addEventListener("click", ()=>{
+    console.log("Back clicked")
+    let currentSongName = currentSong.src.split("/").at(-1);
+    let index = songs.findIndex(song => song.split("/").at(-1) === currentSongName);
+    if((index-1) >= 0) {
+      handleMusic(songs[index-1])
+    }
+   })
+
+   //add an event listener to back and next
+   next.addEventListener("click", () => {
+    console.log("Next clicked");
+    let currentSongName = currentSong.src.split("/").at(-1);
+    let index = songs.findIndex(song => song.split("/").at(-1) === currentSongName);
+    if((index+1) < songs.length) {
+      handleMusic(songs[index+1])
+    }
+});
+
+
+
+
   function formatTime(seconds) {
     const minutes = Math.floor(seconds / 60);
     const secs = Math.floor(seconds % 60);
@@ -61,7 +97,7 @@ function handleMusic(id, name) {
   }
 }
 async function main() {
-  let songs = await getSongs();
+   songs = await getSongs();
 
   
 
@@ -87,7 +123,7 @@ async function main() {
 
   play.addEventListener("click", () => {
     if (currentSong.paused) {
-      currentSong.play();
+       currentSong.play();
       play.src = "pause.svg";
     } else {
       currentSong.pause();
