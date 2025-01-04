@@ -1,5 +1,9 @@
 @import url("https://fonts.gooleapis.com/css2?family=Lato:wght@700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+:root{
+  --a:0;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -89,6 +93,12 @@ body {
   border-radius: 5px;
   background-color: #252525;
   position: relative;
+  transition: all .9s;
+}
+.card:hover{
+  background-color:rgb(198, 198, 198);
+  cursor: pointer;
+  --a: 1;
 }
 .card > * {
   padding-top: 10px;
@@ -110,7 +120,7 @@ body {
   position: absolute;
   top: 168px;
   right: 17px;
-  opacity: 0;
+  opacity: var(--a);
   transition: all 1s ease-out;
 }
 .button > * {
@@ -189,14 +199,21 @@ body {
   padding: 13px;
   border-radius: 5px;
 }
-.info{
+.songList .info{
+  font-size: 13px;
+  width: 344px;
+}
+.info div{
+  word-break: break-all;
+}
+/* .info{
   width: 34px;
   font-size: 10px;
   gap: 10px;
   display: flex;
   justify-content: center;
-  align-items: center;
-}
+   align-items: center;  
+ } */
  .playnow {
   display: flex;
   justify-content: center;
@@ -229,17 +246,34 @@ body {
 .signbuttons img{
   cursor: pointer;
 }
-.songinfo, .songtime{
+.timevol{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.songinfo{
   color: black;
   padding: 0 12px;
   width: 250px;
+} 
+.songtime{
+  width: 125px;
+  color: black;
+  padding: 0 12px;
+
+}
+.volume{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
 }
 .abovebar{
   display: flex;
   justify-content: space-between;
   margin: 20px 0;
 }
- @media (max-width: 1300px){ 
+ @media (max-width: 1200px){ 
   .left{
     position: absolute;
     left: -120%;
@@ -247,8 +281,9 @@ body {
     z-index: 1;
     width: 373px;
     background-color: black;
+    padding: 0;
 }
-.songinfo{
+.songinfo .songtime{
   width: auto;
 }
   .left .close{
@@ -256,7 +291,14 @@ body {
   right: 31px;
   top: 25px;
   width: 29px;
-}  
+} 
+.timevol{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  gap: 13px;
+} 
 .right{
       width: 100vw;
 }
@@ -276,7 +318,7 @@ body {
 
 
  .card{
-  width: 90vw;
+  width: 44vw;
  } 
  .cardContainer{
   margin: 0;
@@ -292,3 +334,9 @@ body {
  }
 
 } 
+@media (max-width: 400px){
+  .card{
+    width: 84vw;
+   }
+
+}

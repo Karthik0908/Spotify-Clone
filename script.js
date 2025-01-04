@@ -1,20 +1,21 @@
 console.log("let javascript");
 let songs;
 
-async function getSongs() {
-  let a = await fetch("http://127.0.0.1:3000/songs/");
+async function getSongs(folder) {
+  let a = await fetch(`http://127.0.0.1:3000/${folder}/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
   let as = div.getElementsByTagName("a");
-  let songs = [];
+  songs = [];
   for (let index = 0; index < as.length; index++) {
     const element = as[index];
     if (element.href.endsWith(".mp3")) {
       songs.push(element.href);
     }
   }
-  return songs;
+  return songs
+ 
 }
 
 let currentSong = null;
@@ -88,6 +89,14 @@ function handleMusic(id, name) {
 });
 
 
+// Add an event to volume 
+document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e)=>{
+  console.log("Setting volume to", e.target.value) 
+  currentSong.volume = parseInt(e.target.value)/100
+})
+
+
+
 
 
   function formatTime(seconds) {
@@ -96,14 +105,30 @@ function handleMusic(id, name) {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   }
 }
-async function main() {
-   songs = await getSongs();
+
+// Load the playlist whenever card is clicked 
+Array.from(document.getElementsByClassName("card")).forEach(e =>{
+  console.log(Array.from(document.getElementsByClassName("card")))
+  e.addEventListener("click",async item=>{
+    debugger
+    songs = await getSongs(`songs/${item.currentTarget.dataset.folder}`)
+    console.log(songs)
+    main(songs)
+  })
+  
+});
+async function main(value) {
+  if(value===undefined){
+    await getSongs("songs/ncs");
+
+  }
 
   
 
   let songUL = document
     .querySelector(".songList")
-    .getElementsByTagName("ul")[0];
+    .getElementsByTagName("ul")[0]
+    songUL.innerHTML = ""
   for (const song of songs) {
     console.log(song.split("/").at(-1).replaceAll("%20", " "));
     songUL.innerHTML =
